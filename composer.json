@@ -1,0 +1,30 @@
+{
+    "name": "tijmenwierenga/guzzle-mock-handler",
+    "description": "A mock handler with assertion capabilities",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tijmen Wierenga",
+            "email": "t.wierenga@live.nl"
+        }
+    ],
+    "require": {
+        "psr/http-message": "^1.0",
+        "guzzlehttp/promises": "^1.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.4",
+        "guzzlehttp/guzzle": "^6.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "TijmenWierenga\\Guzzle\\Mocking\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TijmenWierenga\\Tests\\Guzzle\\Mocking\\": "tests/"
+        }
+    }
+}
