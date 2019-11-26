@@ -10,10 +10,28 @@ use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 use TijmenWierenga\Guzzle\Mocking\Conditions\RequestMethodIs;
+use TijmenWierenga\Guzzle\Mocking\Expectation;
 use TijmenWierenga\Guzzle\Mocking\MockHandler;
 
 final class ExpectationTest extends TestCase
 {
+    public function testItSetsAndMatchesDefaultExpectations(): void
+    {
+        $expectedResponse = new Response();
+        $handler = new MockHandler(
+            new Expectation(
+                fn (RequestInterface $request): bool => $request->getMethod() === 'GET',
+                $expectedResponse
+            )
+        );
+
+        $stack = HandlerStack::create($handler);
+        $client = new Client(['handler' => $stack]);
+
+        $response = $client->request('GET', 'https://api.github.com');
+        static::assertEquals($expectedResponse, $response);
+    }
+
     public function testItCreatesAFluentExpectationWithCallable(): void
     {
         $expectedResponse = new Response();

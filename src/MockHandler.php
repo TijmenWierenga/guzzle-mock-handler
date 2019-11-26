@@ -16,9 +16,10 @@ final class MockHandler
     private array $expectations;
     private ExpectationMatcher $expectationMatcher;
 
-    public function __construct()
+    public function __construct(Expectation ...$expectations)
     {
         $this->expectationMatcher = new ExpectationMatcher($this);
+        $this->expectations = $expectations;
     }
 
     public function __invoke(RequestInterface $request): PromiseInterface
