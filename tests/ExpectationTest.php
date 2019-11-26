@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TijmenWierenga\Tests\Guzzle\MockHandler;
+namespace TijmenWierenga\Tests\Guzzle\Mocking;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
