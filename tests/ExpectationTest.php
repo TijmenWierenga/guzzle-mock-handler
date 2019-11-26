@@ -12,6 +12,7 @@ use Psr\Http\Message\RequestInterface;
 use TijmenWierenga\Guzzle\Mocking\Conditions\RequestMethodIs;
 use TijmenWierenga\Guzzle\Mocking\Expectation;
 use TijmenWierenga\Guzzle\Mocking\MockHandler;
+use TijmenWierenga\Guzzle\Mocking\UnexpectedRequestException;
 
 final class ExpectationTest extends TestCase
 {
@@ -77,5 +78,18 @@ final class ExpectationTest extends TestCase
             'X-Token' => 'token'
         ]]);
         static::assertEquals($expectedResponse, $response);
+    }
+
+    public function testItThrowsAnErrorWhenNoExpectationCanBeMatched(): void
+    {
+        $this->expectException(UnexpectedRequestException::class);
+        $this->expectDeprecationMessage('No expectation could be matched for request: GET https://api.github.com/test');
+
+        $handler = new MockHandler();
+
+        $stack = HandlerStack::create($handler);
+        $client = new Client(['handler' => $stack]);
+
+        $client->request('GET', 'https://api.github.com/test');
     }
 }

@@ -8,10 +8,7 @@ use Psr\Http\Message\RequestInterface;
 
 final class ExpectationMatcher
 {
-    /**
-     * @var MockHandler
-     */
-    private $mockHandler;
+    private MockHandler $mockHandler;
 
     public function __construct(MockHandler $mockHandler)
     {
@@ -26,6 +23,6 @@ final class ExpectationMatcher
             }
         }
 
-        // TODO: Throw exception here
+        throw UnexpectedRequestException::create($request);
     }
 }
