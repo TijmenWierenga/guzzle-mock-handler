@@ -1,6 +1,6 @@
 {
     "name": "tijmenwierenga/guzzle-mock-handler",
-    "description": "A mock handler with assertion capabilities",
+    "description": "A better Guzzle mock handler",
     "type": "library",
     "license": "MIT",
     "authors": [
