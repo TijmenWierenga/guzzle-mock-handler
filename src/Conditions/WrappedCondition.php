@@ -4,18 +4,22 @@ declare(strict_types=1);
 
 namespace TijmenWierenga\Guzzle\Mocking\Conditions;
 
+use Closure;
 use Psr\Http\Message\RequestInterface;
 
 final class WrappedCondition
 {
     /**
-     * @var callable[]
+     * @var Closure[]
      */
-    private $conditions;
+    private array $conditions;
 
     public function __construct(callable ...$conditions)
     {
-        $this->conditions = $conditions;
+        $this->conditions = array_map(
+            fn (callable $condition): Closure => Closure::fromCallable($condition),
+            $conditions
+        );
     }
 
     public function __invoke(RequestInterface $request): bool

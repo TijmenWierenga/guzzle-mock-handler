@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace TijmenWierenga\Guzzle\Mocking;
 
+use Closure;
 use Psr\Http\Message\ResponseInterface;
 use TijmenWierenga\Guzzle\Mocking\Conditions\WrappedCondition;
 
 final class ExpectationBuilder
 {
-    private $condition;
+    private Closure $condition;
     private MockHandler $mockHandler;
 
     public function __construct(MockHandler $mockHandler)
@@ -20,9 +21,9 @@ final class ExpectationBuilder
     public function when(callable $condition, callable ...$conditions): self
     {
         if (count($conditions) > 0) {
-            $this->condition = new WrappedCondition($condition, ...$conditions);
+            $this->condition = Closure::fromCallable(new WrappedCondition($condition, ...$conditions));
         } else {
-            $this->condition = $condition;
+            $this->condition = Closure::fromCallable($condition);
         }
 
         return $this;

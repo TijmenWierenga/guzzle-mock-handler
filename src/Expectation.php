@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace TijmenWierenga\Guzzle\Mocking;
 
+use Closure;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 final class Expectation
 {
-    /**
-     * @var callable
-     */
-    private $condition;
+    private Closure $condition;
     private ResponseInterface $response;
 
     public function __construct(callable $condition, ResponseInterface $response)
     {
-        $this->condition = $condition;
+        $this->condition = Closure::fromCallable($condition);
         $this->response = $response;
     }
 
@@ -28,8 +26,6 @@ final class Expectation
 
     public function matches(RequestInterface $request): bool
     {
-        $condition = $this->condition;
-
-        return $condition($request);
+        return ($this->condition)($request);
     }
 }
