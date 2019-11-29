@@ -17,6 +17,6 @@ final class RequestMethodIs
 
     public function __invoke(RequestInterface $request): bool
     {
-        return $request->getMethod() === $this->httpMethod;
+        return strtoupper($request->getMethod()) === strtoupper($this->httpMethod);
     }
 }
