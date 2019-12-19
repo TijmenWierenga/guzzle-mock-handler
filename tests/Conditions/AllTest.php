@@ -7,16 +7,16 @@ namespace TijmenWierenga\Tests\Guzzle\Mocking\Conditions;
 use GuzzleHttp\Psr7\Request;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
-use TijmenWierenga\Guzzle\Mocking\Conditions\WrappedCondition;
+use TijmenWierenga\Guzzle\Mocking\Conditions\All;
 
-final class WrappedConditionTest extends TestCase
+final class AllTest extends TestCase
 {
     public function testItMatchesWhenAllConditionsAreTrue(): void
     {
         $firstCondition = fn (RequestInterface $request): bool => true;
         $secondCondition = fn (RequestInterface $request): bool => true;
 
-        $wrappedCondition = new WrappedCondition($firstCondition, $secondCondition);
+        $wrappedCondition = new All($firstCondition, $secondCondition);
         $request = new Request('GET', '/');
 
         static::assertTrue($wrappedCondition($request));
@@ -27,7 +27,7 @@ final class WrappedConditionTest extends TestCase
         $firstCondition = fn (RequestInterface $request): bool => true;
         $secondCondition = fn (RequestInterface $request): bool => false;
 
-        $wrappedCondition = new WrappedCondition($firstCondition, $secondCondition);
+        $wrappedCondition = new All($firstCondition, $secondCondition);
         $request = new Request('GET', '/');
 
         static::assertFalse($wrappedCondition($request));
@@ -35,7 +35,7 @@ final class WrappedConditionTest extends TestCase
 
     public function testItMatchesWhenNoConditionsAreProvided(): void
     {
-        $wrappedCondition = new WrappedCondition();
+        $wrappedCondition = new All();
         $request = new Request('GET', '/');
 
         static::assertTrue($wrappedCondition($request));

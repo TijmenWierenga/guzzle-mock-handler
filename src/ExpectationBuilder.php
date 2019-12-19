@@ -6,7 +6,7 @@ namespace TijmenWierenga\Guzzle\Mocking;
 
 use Closure;
 use Psr\Http\Message\ResponseInterface;
-use TijmenWierenga\Guzzle\Mocking\Conditions\WrappedCondition;
+use TijmenWierenga\Guzzle\Mocking\Conditions\All;
 
 final class ExpectationBuilder
 {
@@ -21,7 +21,7 @@ final class ExpectationBuilder
     public function when(callable $condition, callable ...$conditions): self
     {
         if (count($conditions) > 0) {
-            $this->condition = Closure::fromCallable(new WrappedCondition($condition, ...$conditions));
+            $this->condition = Closure::fromCallable(new All($condition, ...$conditions));
         } else {
             $this->condition = Closure::fromCallable($condition);
         }

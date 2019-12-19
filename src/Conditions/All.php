@@ -7,7 +7,7 @@ namespace TijmenWierenga\Guzzle\Mocking\Conditions;
 use Closure;
 use Psr\Http\Message\RequestInterface;
 
-final class WrappedCondition
+final class All
 {
     /**
      * @var Closure[]

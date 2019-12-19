@@ -9,7 +9,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
-use TijmenWierenga\Guzzle\Mocking\Conditions\RequestMethodIs;
+use TijmenWierenga\Guzzle\Mocking\Conditions\Method;
 use TijmenWierenga\Guzzle\Mocking\Expectation;
 use TijmenWierenga\Guzzle\Mocking\MockHandler;
 use TijmenWierenga\Guzzle\Mocking\UnexpectedRequestException;
@@ -51,7 +51,7 @@ final class ExpectationTest extends TestCase
     {
         $expectedResponse = new Response();
         $handler = new MockHandler();
-        $handler->when(new RequestMethodIs('GET'))
+        $handler->when(Method::is('GET'))
             ->respondWith($expectedResponse);
 
         $stack = HandlerStack::create($handler);
@@ -66,7 +66,7 @@ final class ExpectationTest extends TestCase
         $expectedResponse = new Response();
         $handler = new MockHandler();
         $handler->when(
-            new RequestMethodIs('GET'),
+            Method::is('GET'),
             fn (RequestInterface $request): bool => $request->hasHeader('X-Token')
         )
             ->respondWith($expectedResponse);

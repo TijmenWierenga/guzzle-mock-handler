@@ -6,14 +6,14 @@ namespace TijmenWierenga\Tests\Guzzle\Mocking\Conditions;
 
 use GuzzleHttp\Psr7\Request;
 use PHPUnit\Framework\TestCase;
-use TijmenWierenga\Guzzle\Mocking\Conditions\RequestMethodIs;
+use TijmenWierenga\Guzzle\Mocking\Conditions\Method;
 
-final class RequestMethodIsTest extends TestCase
+final class MethodTest extends TestCase
 {
     public function testItMatchesAConditionBasedOnTheRequestMethod(): void
     {
-        $uppercaseGetCondition = new RequestMethodIs('GET');
-        $lowercaseGetCondition = new RequestMethodIs('get');
+        $uppercaseGetCondition = Method::is('GET');
+        $lowercaseGetCondition = Method::is('get');
 
         $getRequest = new Request('GET', '/');
         $postRequest = new Request('POST', '/');
