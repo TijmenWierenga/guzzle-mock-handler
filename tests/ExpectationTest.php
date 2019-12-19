@@ -83,7 +83,7 @@ final class ExpectationTest extends TestCase
     public function testItThrowsAnErrorWhenNoExpectationCanBeMatched(): void
     {
         $this->expectException(UnexpectedRequestException::class);
-        $this->expectDeprecationMessage('No expectation could be matched for request: GET https://api.github.com/test');
+        $this->expectExceptionMessage('No expectation could be matched for request: GET https://api.github.com/test');
 
         $handler = new MockHandler();
 
