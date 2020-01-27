@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TijmenWierenga\Guzzle\Mocking\Conditions;
 
-use Closure;
 use Psr\Http\Message\RequestInterface;
 
 final class Header

@@ -19,5 +19,8 @@ jobs:
     - name: Run PHPStan
       run: vendor/bin/phpstan analyze
 
+    - name: Run Psalm
+      run: vendor/bin/psalm
+
     - name: Run test suite
       run: vendor/bin/phpunit

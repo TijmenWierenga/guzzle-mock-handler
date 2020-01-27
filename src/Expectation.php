@@ -26,6 +26,6 @@ final class Expectation
 
     public function matches(RequestInterface $request): bool
     {
-        return ($this->condition)($request);
+        return (bool) ($this->condition)($request);
     }
 }

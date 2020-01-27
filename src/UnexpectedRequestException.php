@@ -15,7 +15,7 @@ final class UnexpectedRequestException extends RuntimeException
             sprintf(
                 'No expectation could be matched for request: %s %s',
                 $request->getMethod(),
-                $request->getUri()
+                (string) $request->getUri()
             )
         );
     }
