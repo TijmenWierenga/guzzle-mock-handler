@@ -10,6 +10,9 @@ use TijmenWierenga\Guzzle\Mocking\Conditions\All;
 
 final class ExpectationBuilder
 {
+    /**
+     * @psalm-suppress PropertyNotSetInConstructor
+     */
     private Closure $condition;
     private MockHandler $mockHandler;
 

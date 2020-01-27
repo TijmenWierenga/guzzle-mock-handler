@@ -11,7 +11,7 @@ use function GuzzleHttp\Promise\promise_for;
 final class MockHandler
 {
     /**
-     * @var array|Expectation[]
+     * @var array<Expectation>
      */
     private array $expectations;
     private ExpectationMatcher $expectationMatcher;
@@ -40,7 +40,7 @@ final class MockHandler
     }
 
     /**
-     * @return array|Expectation[]
+     * @return array<Expectation>
      */
     public function getExpectations(): array
     {
