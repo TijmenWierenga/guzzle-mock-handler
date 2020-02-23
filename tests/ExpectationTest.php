@@ -80,6 +80,51 @@ final class ExpectationTest extends TestCase
         static::assertEquals($expectedResponse, $response);
     }
 
+    public function testItFailsWhenTheMaximumAllowedInvocationsLimitIsHit(): void
+    {
+        $expectedResponse = new Response();
+        $handler = new MockHandler(
+            new Expectation(
+                fn (RequestInterface $request): bool => true,
+                $expectedResponse,
+                1
+            )
+        );
+
+        $stack = HandlerStack::create($handler);
+        $client = new Client(['handler' => $stack]);
+
+        $response = $client->get('/');
+
+        static::assertEquals($expectedResponse, $response);
+
+        $this->expectException(UnexpectedRequestException::class);
+
+        $client->get('/');
+    }
+
+    public function testItFailsWhenReachingMaxInvocationsWithFluentBuilder(): void
+    {
+        $handler = new MockHandler();
+
+        $expectedResponse = new Response();
+
+        $handler->when(fn (RequestInterface $request): bool => true)
+            ->withMaxInvocations(1)
+            ->respondWith($expectedResponse);
+
+        $stack = HandlerStack::create($handler);
+        $client = new Client(['handler' => $stack]);
+
+        $response = $client->get('/');
+
+        static::assertEquals($expectedResponse, $response);
+
+        $this->expectException(UnexpectedRequestException::class);
+
+        $client->get('/');
+    }
+
     public function testItThrowsAnErrorWhenNoExpectationCanBeMatched(): void
     {
         $this->expectException(UnexpectedRequestException::class);
