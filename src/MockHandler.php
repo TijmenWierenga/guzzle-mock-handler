@@ -6,6 +6,7 @@ namespace TijmenWierenga\Guzzle\Mocking;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Http\Message\RequestInterface;
+
 use function GuzzleHttp\Promise\promise_for;
 
 final class MockHandler
