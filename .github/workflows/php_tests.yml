@@ -15,6 +15,9 @@ jobs:
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
+
+    - name: Run PHP Codesniffer
+      run: vendor/bin/phpcs src tests --standard=PSR12
     
     - name: Run PHPStan
       run: vendor/bin/phpstan analyze
