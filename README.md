@@ -1,6 +1,8 @@
 # Better Guzzle Mock Handler
 ![Build status](https://github.com/tijmenwierenga/guzzle-mock-handler/workflows/PHP%20Composer/badge.svg)
 
+[![Buy us a tree](https://img.shields.io/badge/Treeware-%F0%9F%8C%B3-lightgreen?style=for-the-badge)](https://offset.earth/treeware?gift-trees)
+
 While the Guzzle HTTP client ships with a basic mock handler it might not be powerful enough in certain situations.
 For example, when your requests don't arrive in an expected order. That's where this Mock Handler might come in handy.
 
