@@ -40,7 +40,7 @@ $client = new Client(['handler' => $handlerStack]);
 ```
 
 ### Adding expectations
-The `ExpectationBuilder` can be leveraged in order to set request expectations:
+Use the `ExpectationBuilder` in order to set request expectations:
 
 ```php
 <?php
@@ -61,3 +61,25 @@ In the example above the Mock Handler will return an empty 200 OK response on ev
 
 When no expectation matches the request, the Mock Handler will throw a `TijmenWierenga\Guzzle\Mocking\UnexpectedRequestException`.
 
+### Invocation limits
+You might want to limit the amount of invocations for an expectation.
+By default, there is no invocation limit set.
+The `ExpectationBuilder` is capable of limiting the amount of times a response can be returned.
+This can be achieved through the `withMaxInvocations()` method on the builder:
+
+```php
+<?php
+
+use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\RequestInterface;
+use TijmenWierenga\Guzzle\Mocking\MockHandler;
+
+/** @var MockHandler $mockHandler */
+$mockHandler
+    ->when(fn (RequestInterface $request): bool => $request->getMethod() === 'GET')
+    ->withMaxInvocations(1)
+    ->respondWith(new Response(200));
+```
+
+In the example above, the response will only be returned once, even when it satisfies the defined condition.
+The handler will throw a `TijmenWierenga\Guzzle\Mocking\UnexpectedRequestException` on any invocation after the first.

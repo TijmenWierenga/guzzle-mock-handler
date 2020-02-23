@@ -15,6 +15,7 @@ final class ExpectationBuilder
      */
     private Closure $condition;
     private MockHandler $mockHandler;
+    private int $maxInvocations = PHP_INT_MAX;
 
     public function __construct(MockHandler $mockHandler)
     {
@@ -32,9 +33,16 @@ final class ExpectationBuilder
         return $this;
     }
 
+    public function withMaxInvocations(int $maxInvocations): self
+    {
+        $this->maxInvocations = $maxInvocations;
+
+        return $this;
+    }
+
     public function respondWith(ResponseInterface $response): void
     {
-        $expectation = new Expectation($this->condition, $response);
+        $expectation = new Expectation($this->condition, $response, $this->maxInvocations);
         $this->mockHandler->append($expectation);
     }
 }

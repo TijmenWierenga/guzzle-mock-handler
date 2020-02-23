@@ -6,6 +6,7 @@ namespace TijmenWierenga\Guzzle\Mocking;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Http\Message\RequestInterface;
+
 use function GuzzleHttp\Promise\promise_for;
 
 final class MockHandler
@@ -25,6 +26,7 @@ final class MockHandler
     public function __invoke(RequestInterface $request): PromiseInterface
     {
         $expectation = $this->expectationMatcher->match($request);
+        $expectation->addInvocation();
 
         return promise_for($expectation->getResponse());
     }
@@ -40,7 +42,9 @@ final class MockHandler
     }
 
     /**
-     * @return array<Expectation>
+     * @internal
+     * @psalm-internal TijmenWierenga\Guzzle\Mocking\ExpectationMatcher
+     * @return Expectation[]
      */
     public function getExpectations(): array
     {
