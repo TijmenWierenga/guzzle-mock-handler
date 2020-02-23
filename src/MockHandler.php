@@ -42,7 +42,9 @@ final class MockHandler
     }
 
     /**
-     * @return array<Expectation>
+     * @internal
+     * @psalm-internal TijmenWierenga\Guzzle\Mocking\ExpectationMatcher
+     * @return Expectation[]
      */
     public function getExpectations(): array
     {

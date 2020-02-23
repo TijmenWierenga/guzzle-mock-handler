@@ -22,6 +22,9 @@ final class Expectation
         $this->maxInvocations = $maxInvocations;
     }
 
+    /**
+     * @psalm-mutation-free
+     */
     public function getResponse(): ResponseInterface
     {
         return $this->response;
@@ -36,6 +39,9 @@ final class Expectation
         $this->invocations++;
     }
 
+    /**
+     * @psalm-mutation-free
+     */
     public function matches(RequestInterface $request): bool
     {
         if ($this->reachedMaxInvocations()) {
