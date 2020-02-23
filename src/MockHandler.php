@@ -25,6 +25,7 @@ final class MockHandler
     public function __invoke(RequestInterface $request): PromiseInterface
     {
         $expectation = $this->expectationMatcher->match($request);
+        $expectation->addInvocation();
 
         return promise_for($expectation->getResponse());
     }
