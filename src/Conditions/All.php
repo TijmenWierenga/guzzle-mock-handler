@@ -7,6 +7,9 @@ namespace TijmenWierenga\Guzzle\Mocking\Conditions;
 use Closure;
 use Psr\Http\Message\RequestInterface;
 
+/**
+ * @psalm-immutable
+ */
 final class All
 {
     /**
