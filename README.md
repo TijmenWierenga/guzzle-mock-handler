@@ -87,6 +87,30 @@ $mockHandler
 In the example above, the response will only be returned once, even when it satisfies the defined condition.
 The handler will throw a `TijmenWierenga\Guzzle\Mocking\UnexpectedRequestException` on any invocation after the first.
 
+### Built-in conditions
+The package ships with a few built-in conditions. These conditions can be used to create expectations in an expressive way.
+
+#### All
+While it's perfectly valid to pass a callable and match multiple conditions, it's more expressive to use the `All` condition.
+This condition accept any amount of conditions that all need to match based on the current request.
+
+```php
+use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\RequestInterface;
+use TijmenWierenga\Guzzle\Mocking\Conditions\All;
+use TijmenWierenga\Guzzle\Mocking\MockHandler;
+
+/** @var MockHandler $mockHandler */
+$mockHandler
+    ->when(
+        new All(
+            fn (RequestInterface $request): bool => $request->getMethod() === 'GET',
+            fn (RequestInterface $request): bool => $request->getUri()->getHost() === 'google.com'
+        )
+    )
+    ->respondWith(new Response(200));
+```
+
 ## Treeware
 
 You're free to use this package, but if it makes it to your production environment you are required to buy the world a tree.
