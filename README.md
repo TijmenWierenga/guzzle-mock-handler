@@ -19,7 +19,7 @@ Usually you'll want to install this package as a development dependency:
 composer install tijmenwierenga/guzzle-mock-handler --dev
 ```
 
-If you want to install the package in production:
+If you want to install the package for production:
 
 ```bash
 composer install tijmenwierenga/guzzle-mock-handler
