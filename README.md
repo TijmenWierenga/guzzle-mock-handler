@@ -6,24 +6,23 @@
 While the Guzzle HTTP client ships with a basic mock handler it might not be powerful enough in certain situations.
 For example, when your requests don't arrive in an expected order. That's where this Mock Handler might come in handy.
 
+You'll be able to set expectations for incoming requests. When an expectation is met a predefined response will be
+returned.
+
 ## Requirements
 Minimum PHP version is 7.4.
 
 ## Installation
-Package is not published yet, so for now it can only be installed through Composer using a custom repository:
+Usually you'll want to install this package as a development dependency:
 
-```json
-{
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/TijmenWierenga/guzzle-mock-handler"
-        }
-    ],
-    "require": {
-        "tijmenwierenga/guzzle-mock-handler": "dev-master"
-    }
-}
+```bash
+composer install tijmenwierenga/guzzle-mock-handler --dev
+```
+
+If you want to install the package in production:
+
+```bash
+composer install tijmenwierenga/guzzle-mock-handler
 ```
 
 ## Usage
