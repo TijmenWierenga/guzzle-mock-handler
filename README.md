@@ -131,6 +131,8 @@ $mockHandler
     ->respondWith(new Response(200));
 ```
 
+More conditions can be found in the [`Conditions`](src/Conditions)-folder.
+
 ## Treeware
 
 You're free to use this package, but if it makes it to your production environment you are required to buy the world a tree.
