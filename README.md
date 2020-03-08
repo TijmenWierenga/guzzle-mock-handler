@@ -111,6 +111,26 @@ $mockHandler
     ->respondWith(new Response(200));
 ```
 
+#### Any
+This condition accepts any number of conditions. When any of the supplied conditions is met, the pre-defined response will be returned.
+
+```php
+use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\RequestInterface;
+use TijmenWierenga\Guzzle\Mocking\Conditions\Any;
+use TijmenWierenga\Guzzle\Mocking\MockHandler;
+
+/** @var MockHandler $mockHandler */
+$mockHandler
+    ->when(
+        new Any(
+            fn (RequestInterface $request): bool => $request->getMethod() === 'GET',
+            fn (RequestInterface $request): bool => $request->getMethod() === 'POST',
+        )
+    )
+    ->respondWith(new Response(200));
+```
+
 ## Treeware
 
 You're free to use this package, but if it makes it to your production environment you are required to buy the world a tree.
