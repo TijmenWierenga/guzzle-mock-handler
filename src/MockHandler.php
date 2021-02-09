@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace TijmenWierenga\Guzzle\Mocking;
 
+use GuzzleHttp\Promise\Create;
 use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Http\Message\RequestInterface;
-
-use function GuzzleHttp\Promise\promise_for;
 
 final class MockHandler
 {
     /**
-     * @var array<Expectation>
+     * @var list<Expectation>
      */
     private array $expectations;
     private ExpectationMatcher $expectationMatcher;
@@ -28,7 +27,7 @@ final class MockHandler
         $expectation = $this->expectationMatcher->match($request);
         $expectation->addInvocation();
 
-        return promise_for($expectation->getResponse());
+        return Create::promiseFor($expectation->getResponse());
     }
 
     public function when(callable ...$conditions): ExpectationBuilder
@@ -43,7 +42,7 @@ final class MockHandler
 
     /**
      * @internal
-     * @psalm-internal TijmenWierenga\Guzzle\Mocking\ExpectationMatcher
+     * @psalm-internal TijmenWierenga\Guzzle\Mocking
      * @return Expectation[]
      */
     public function getExpectations(): array
