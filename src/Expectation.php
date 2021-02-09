@@ -32,7 +32,7 @@ final class Expectation
 
     /**
      * @internal
-     * @psalm-internal TijmenWierenga\Guzzle\Mocking\MockHandler
+     * @psalm-internal TijmenWierenga\Guzzle\Mocking
      */
     public function addInvocation(): void
     {

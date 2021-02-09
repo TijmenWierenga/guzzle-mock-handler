@@ -1,4 +1,4 @@
-PHP_VERSION = 7.4
+PHP_VERSION = 8.0
 DOCKER_RUN = docker run -it --rm -v $$(pwd):/app -w /app php:${PHP_VERSION}-alpine
 
 test: phpcs phpstan phpunit psalm
