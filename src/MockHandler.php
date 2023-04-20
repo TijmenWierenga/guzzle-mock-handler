@@ -11,7 +11,7 @@ use Psr\Http\Message\RequestInterface;
 final class MockHandler
 {
     /**
-     * @var list<Expectation>
+     * @var Expectation[]
      */
     private array $expectations;
     private ExpectationMatcher $expectationMatcher;
